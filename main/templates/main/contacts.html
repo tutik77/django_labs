@@ -1,0 +1,39 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+
+<h3>Свяжитесь со мной</h3>
+<p>Буду рад ответить на ваши вопросы!</p>
+
+{% if submitted %}
+<p style="color: green; margin: 10px 0;">Сообщение отправлено.</p>
+{% endif %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    <div style="margin-bottom: 15px;">
+        <label for="name">Имя:</label><br>
+        <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+    
+    <div style="margin-bottom: 15px;">
+        <label for="message">Сообщение:</label><br>
+        <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 8px; box-sizing: border-box;"></textarea>
+    </div>
+    
+    <button type="submit" style="background: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+        Отправить
+    </button>
+</form>
+
+<h3>Контактная информация</h3>
+<p>Email: kolyanganster@gmail.com</p>
+<p>Телефон: +7 800 555 35 35</p>
+{% endblock %}
+
