@@ -1,0 +1,23 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<p>Список пройденных лекций:</p>
+
+{% for lecture in lectures %}
+<div class="project" style="border: 1px solid #ddd; padding: 15px; margin: 10px 0;">
+    <h3>
+        <a href="{% url 'lecture_detail' lecture.id %}" style="text-decoration: none; color: #007bff;">
+            {{ lecture.title }}
+        </a>
+    </h3>
+    <p><strong>Дата создания:</strong> {{ lecture.created_at|date:"d.m.Y" }}</p>
+    <p>{{ lecture.description|truncatewords:30 }}</p>
+    <a href="{% url 'lecture_detail' lecture.id %}">Подробнее →</a>
+</div>
+{% empty %}
+<p>Лекций пока нет. Они скоро появятся!</p>
+{% endfor %}
+{% endblock %}
+
+

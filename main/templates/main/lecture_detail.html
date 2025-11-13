@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<div class="project-detail">
+    <h2>{{ lecture.title }}</h2>
+    <div class="project-meta">
+        <p><strong>Дата создания:</strong> {{ lecture.created_at|date:"d.m.Y H:i" }}</p>
+    </div>
+    <div class="project-description">
+        <h3>Описание лекции</h3>
+        <p>{{ lecture.description }}</p>
+    </div>
+    <div class="project-actions">
+        <a href="{% url 'lectures' %}" class="btn-back">← Назад к списку лекций</a>
+    </div>
+    </div>
+{% endblock %}
+
+

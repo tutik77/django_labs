@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import ContactMessage
+from django.shortcuts import render, get_object_or_404
+from .models import ContactMessage, Project, Lecture
 
 def home(request):
     context = {'title': 'Главная страница'}
@@ -10,9 +10,9 @@ def about(request):
     return render(request, 'main/about.html', context)
 
 def portfolio(request):
-    projects = ["Проект 1", "Проект 2", "Проект 3"]
+    projects = Project.objects.all().order_by('-created_at')
     context = {
-        'title': 'Портфолио', 
+        'title': 'Портфолио',
         'projects': projects
     }
     return render(request, 'main/portfolio.html', context)
@@ -26,3 +26,27 @@ def contacts(request):
             ContactMessage.objects.create(name=name, email=email, message=message)
             return render(request, 'main/contacts.html', {'title': 'Контакты', 'submitted': True})
     return render(request, 'main/contacts.html', {'title': 'Контакты'})
+
+def lectures(request):
+    lectures = Lecture.objects.all().order_by('-created_at')
+    context = {
+        'title': 'Лекции',
+        'lectures': lectures
+    }
+    return render(request, 'main/lectures.html', context)
+
+def project_detail(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    context = {
+        'title': project.title,
+        'project': project
+    }
+    return render(request, 'main/project_detail.html', context)
+
+def lecture_detail(request, lecture_id):
+    lecture = get_object_or_404(Lecture, id=lecture_id)
+    context = {
+        'title': lecture.title,
+        'lecture': lecture
+    }
+    return render(request, 'main/lecture_detail.html', context)
