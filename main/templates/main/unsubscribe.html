@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+{% if unsubscribed %}
+<div style="padding: 10px; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 4px; margin-bottom: 20px;">
+    Вы отписались от рассылки.
+</div>
+{% endif %}
+<div style="max-width: 500px;">
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom: 15px;">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+            <div style="color: red; font-size: 14px;">
+                {{ form.email.errors }}
+            </div>
+            {% endif %}
+        </div>
+        <button type="submit" style="padding: 10px 20px; background: #2c3e50; color: white; border: none; border-radius: 4px; cursor: pointer;">Отписаться</button>
+    </form>
+</div>
+{% endblock %}
+*** End Patch
+

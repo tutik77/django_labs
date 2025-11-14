@@ -1,0 +1,29 @@
+{% extends 'main/layout.html' %}
+
+{% block content %}
+<div class="subscribers-list">
+    <h2>{{ title }}</h2>
+
+    {% if subscribers %}
+        {% for s in subscribers %}
+        <div style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <div><strong>{{ s.email }}</strong></div>
+                <div style="color:#666; font-size: 14px;">{{ s.subscribed_at|date:"d.m.Y H:i" }}</div>
+            </div>
+            <div>
+                {% if s.is_active %}
+                <span style="background: #28a745; color: white; padding: 5px 10px; border-radius: 3px;">Активен</span>
+                {% else %}
+                <span style="background: #dc3545; color: white; padding: 5px 10px; border-radius: 3px;">Неактивен</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Подписчиков пока нет.</p>
+    {% endif %}
+</div>
+{% endblock %}
+*** End Patch
+
